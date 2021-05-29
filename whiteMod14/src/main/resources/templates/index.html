@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header text-center text-white bg-secondary "
+			style="font-size:25px;"
+			 th:text="${titulo}"></div>
+			
+				<div class="card-body">
+					<img 
+					class="img-thumbnail rounded float-left" style="height:300px"
+					th:src="@{'/uploads/' + ${'2018-339.JPG'}}"  /> 
+				
+				
+			</div>
+		</div>
+</div>
+
+		<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,2 @@
+subido al servidor "heroku", el unico problema es que no me permite cargar imagenes, con lo cual simplifique la aplicacion sacando todo lo que tiene que ver con la imagen del cuadro.
+ la direccion es: https://modulo14.herokuapp.com

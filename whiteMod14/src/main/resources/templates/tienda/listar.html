@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout::head">
+
+</head>
+<body>
+<header th:replace="layout/layout::header"></header>
+	
+	<div class="container py-4 text-center">
+		<div class="card bg-light">
+			<div class="card-header  text-white bg-secondary "  style="width: 100%;" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title text-left">
+				 <a th:href="@{form}" class="btn btn-primary btn-xs ">Crear	tienda</a> 
+				</h4>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Capacidad</th>
+							<th>Añadir cuadro</th>
+							<th>Listar cuadros</th>
+							<th>Eliminar stock</th>
+							<th>Eliminar tienda</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="tienda: ${tiendas} ">
+							<!--<td th:text="${tienda.id}"></td>
+							 indica .id pero esta llamando al metodo getId -->
+							 <td   ><a class="btn btn-primary btn-xs"
+								th:href="@{/tienda/listar/} + ${tienda.id}" th:text="${tienda.id}"></a></td> 
+							
+							<td th:text="${tienda.nombre}"></td>
+							<td th:text="${tienda.CantMaxCuadros}"></td>	
+							<td th:if ="${tienda.getEspacio()>0}">
+							       <a th:href="@{/tienda/formCuadro/} + ${tienda.id}" 
+									th:text="${'Añadir cuadro'}" 
+									class="btn btn-primary btn-xs"></a>
+							</td>
+							<td th:if ="${tienda.getEspacio()==0}" th:text="${'Tienda completa'}">	</td>
+							
+													
+						 	<td th:if ="${!tienda.estaVacia()}"><a  class="btn btn-success btn-xs"   
+								    th:href="@{/tienda/listar/} + ${tienda.getId()}"  th:text="'Listar cuadros'"></a>								    
+						   </td>
+						   <td th:if ="${tienda.estaVacia()}"th:text="'Tienda vacia'" >	</td>											 			   							
+							
+						   <td th:if ="${!tienda.estaVacia()}"><a class="btn btn-danger btn-xs "
+								th:href="@{/tienda/eliminarStock/}+ ${tienda.id}" th:text="'Eliminar stock'"
+								onclick="return confirm('Estas seguro de eliminar?');"> </a>
+						   </td>
+						   <td th:if ="${tienda.estaVacia()}"th:text="'Tienda vacia'" >	</td>
+						   <td > <a class="btn btn-secondary btn-xs"
+								th:href="@{/eliminar/} + ${tienda.id}"  th:text="'Eliminar tienda'"
+								onclick="return confirm('Estas seguro de eliminar?');"></a>	
+   					       </td>		
+						</tr>
+					</tbody>
+				</table>
+			 <nav th:replace="paginator::paginator"></nav>  
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>

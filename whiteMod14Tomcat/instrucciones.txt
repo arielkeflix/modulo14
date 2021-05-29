@@ -1,0 +1,5 @@
+Configuracion:
+1-Debes poner la carpeta "uploads" dentro de C:/Windows/Temp  ya que el upload de imagenes esta direccionado a  C:/Windows/Temp/uploads
+2-Debes poner el archivo whiteMod14.war dentro de la carpeta donde se encuentra el servidor "tomcat" y dentro de tomcat en la carpet "webapps"   /ruta donde se encuentre/tomcat/webapps
+3-para poner en marcha el tomcat tomcat/bin/startup.bat  a veces es necesario en el shel una vez que estas en bin poner ./startup.bat 
+4- en la barra del  navegador localhost:8080/whiteMod14/  por default el tomcat usa el puerto 8080 pero esto podria estar configurado diferente

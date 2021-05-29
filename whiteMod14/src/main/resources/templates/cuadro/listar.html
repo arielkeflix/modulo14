@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout::head">
+
+</head>
+<body>
+	<header th:replace="layout/layout::header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div th:if="${tienda.getEspacio()} > 0"
+				class="card-header text-center text-white bg-secondary"
+				th:text="${titulo}" style="width: 100%;"></div>
+			<div th:if="${tienda.getEspacio()} == 0"
+				class="card-header text-center text-white bg-secondary"
+				th:text="${ 'La tienda ' + tienda.nombre + ' esta completa, no se pueden agregar mas cuadros'}"
+				style="width: 100%;"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:if="${tienda.getEspacio()} > 0"
+						th:href="@{/tienda/formCuadro/} + ${tienda.id}"
+						th:text="${'Crear cuadro'}" class="btn btn-primary btn-xs"></a>
+
+				</h4>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Autor</th>
+							<th>Precio</th>
+							<th>Fecha ingreso</th>
+							<th>Mostrar</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cuadro: ${cuadros} ">
+
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/tienda/verCuadro/} + ${cuadro.id}"
+								th:text="${cuadro.id}"></a></td>
+
+							<td th:text="${cuadro.nombre}"></td>
+							<td th:text="${cuadro.autor}"></td>
+							<td th:text="${cuadro.precio}"></td>
+							<td
+								th:text="${#calendars.format (cuadro.fechaIngreso , 'dd-MM-yyyy')}"></td>
+
+							<td><a th:href="@{/tienda/verCuadro/}+ ${cuadro.id}"> <img
+									th:if="${#strings.length(cuadro.foto) > 0}"
+									class="img-fluid rounded float-left" style="height: 40px;"
+									th:src="@{'/uploads/' + ${cuadro.foto}}" />
+							</a></td>
+
+							<td><a class="btn btn-success btn-xs "
+								th:href="@{/tienda/editarCuadro/}+ ${cuadro.id}"
+								th:text="'Editar'"> </a></td>
+
+							<td><a class="btn btn-danger btn-xs "
+								th:href="@{/tienda/eliminarCuadro/}+ ${cuadro.id}"
+								th:text="'Eliminar'"
+								onclick="return confirm('Estas seguro de eliminar?');"> </a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator::paginator"></nav>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout::footer"></footer>
+</body>
+</html>
